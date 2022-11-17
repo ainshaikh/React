@@ -1,25 +1,38 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState, React, useEffect} from 'react';
+import { useRef, useState } from 'react';
 
 // import Header from "./Components/Header";
 // import Footer from "./Components/Footer";
 // import Todos from "./Components/Todos";
 
 function App() {
-  const [count, setCounter] = useState(0)
 
-  useEffect ( ()=>{
-    console.log("component mounted");
-  },[])
-
-  function updateCount(){
-    setCounter(count+1)
+  const refElement = useRef("");     // useRef- use to manipulate the DOM
+  const [name, setName] = useState("Ain")
+  console.log(refElement);
+  function reset (){
+    setName ("")
+    refElement.current.focus()
   }
 
-  function updateCountinNegative (){
-    setCounter (count-1)
+  function colorChange (){
+    refElement.current.style.color = "red";
+    refElement.current.value = "Pushpa"
   }
+  // const [count, setCounter] = useState(0)
+
+  // useEffect ( ()=>{
+  //   console.log("component mounted");
+  // },[])
+
+  // function updateCount(){
+  //   setCounter(count+1)
+  // }
+
+  // function updateCountinNegative (){
+  //   setCounter (count-1)
+  // }
   // let todos = [
   //  {
   //   Sno: 1,
@@ -42,9 +55,11 @@ function App() {
   return (
     <>
   
-    <h1>Button clicked {count}</h1>
-    <button onClick = {updateCount}>click for increasing</button>
-    <button onClick={updateCountinNegative}>click for decreasing </button>
+    <h1> Learning useRef</h1>
+    <input ref = {refElement} type="text" value={name} onChange = {(e)=> setName(e.target.value)}></input>
+    <button onClick={reset}> Reset </button>
+    <button onClick={colorChange}>Change color</button>
+    
    
   {/* /* <Header title = "My Todo List" searchBar = {false}/>
   <Todos todos={todos}/>
